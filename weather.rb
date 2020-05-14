@@ -6,6 +6,7 @@ forecast = HTTParty.get(url).parsed_response.to_hash
 # pp = pretty print
 # use instead of `puts` to make reading a hash a lot easier
 # pp forecast
+# puts "It is currently #{forecast["current"]["temp"]} degrees F"
 
 # Example output:
 #
@@ -19,8 +20,14 @@ forecast = HTTParty.get(url).parsed_response.to_hash
 # A high of 55.13 and Clouds
 # A high of 49.03 and Rain
 # A high of 51.69 and Rain
-puts "It is currently #{forecast["current"]["temp"]} degrees and #{forecast["current"]["weather"][0]["main"]}"
+# puts "It is currently #{forecast["current"]["temp"]} degrees and #{forecast["current"]["weather"][0]["main"]}"
+# puts "Extended forecast:"
+# for day in forecast["daily"]
+#   puts "A high of #{day["temp"]["max"]} and #{day["weather"][0]["main"]}"
+# end
+
+puts "It is currently #{forecast["current"]["temp"]} degrees F and #{forecast["current"]["weather"][0]["main"]}"
 puts "Extended forecast:"
 for day in forecast["daily"]
-  puts "A high of #{day["temp"]["max"]} and #{day["weather"][0]["main"]}"
+    puts "A high of #{day["temp"]["max"]}, a low of #{day["temp"]["min"]} and #{day["weather"][0]["main"]}."
 end

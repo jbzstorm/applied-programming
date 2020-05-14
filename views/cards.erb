@@ -18,19 +18,24 @@
     <!-- Your own CSS -->
     <link rel="stylesheet" href="/styles.css">
 
-    <title>Dice</title>
+    <title>Cards</title>
   </head>
   <body>
 
     <div class="container mt-5">
       <h1>KIEI-451 Casino!</h1>
-
       <div class="row">
-        <%# Remove the hard-coding and have this come from a "deck" of cards %>
-        <div class="col-sm-3"><img class="img-fluid" src="/images/cards/queen_of_hearts.png"></div>
-        <div class="col-sm-3"><img class="img-fluid" src="/images/cards/queen_of_diamonds.png"></div>
-        <div class="col-sm-3"><img class="img-fluid" src="/images/cards/queen_of_clubs.png"></div>
-        <div class="col-sm-3"><img class="img-fluid" src="/images/cards/queen_of_spades.png"></div>
+        <% for card in @deck_shuffle %>
+            <div class="col-sm-2"><img class="img-fluid" src="/images/cards/<%= card %>.png"></div>
+        <% end %>  
+      </div>
+      
+      <br>
+      <p>
+        <a href="/" class="btn btn-success"> Deal Again </a>
+      </p>
+
+ 
       </div>
 
       <%# Add a "deal again" button %>
