@@ -12,7 +12,10 @@ blockchain = [
   { :from_user => "ben", :to_user => "jeff", :amount => 400 },
   { :from_user => "brian", :to_user => "jeff", :amount => 1500 },
   { :from_user => "jeff", :to_user => "brian", :amount => 4500 },
-  { :from_user => "jeff", :to_user => "ben", :amount => 1750 }
+  { :from_user => "jeff", :to_user => "ben", :amount => 1750 },
+  { :from_user => "jeff", :to_user => "bozhi", :amount => 2650 },
+  { :from_user => "brian", :to_user => "bozhi", :amount => 8000 },
+  { :from_user => "ben", :to_user => "bozhi", :amount => 10350 }
 ]
 
 # Write code below that returns the number of KelloggCoin that each user has in their 
@@ -23,18 +26,36 @@ blockchain = [
 # Ben's KelloggCoin balance is 10350
 # Jeff's KelloggCoin balance is 2650
 
-brians_balance = 0
-bens_balance = 0
-jeffs_balance = 0
-
-# fill the balances
-
-puts "Brian's KelloggCoin balance is #{brians_balance}"
-puts "Ben's KelloggCoin balance is #{bens_balance}"
-puts "Jeff's KelloggCoin balance is #{jeffs_balance}"
-
 # Notes...
 # Build a solution that assumes there are only these three participants. If you can do that,
 # and you're itching for more, think about if there other ways to implement the solution that 
 # are more flexible; i.e. what if we added someone new to the blockchain? is there a way to 
 # do this where we wouldn't have to rewrite the code?
+
+users = []
+balance = []
+
+for record in blockchain
+    users << record[:from_user]
+    users << record[:to_user]
+end
+
+users = users.uniq.compact
+puts users.inspect
+
+for user in users 
+    wallet = 0 
+    for record in blockchain
+        if user == record[:to_user]
+            wallet = wallet + record[:amount]
+        elsif user == record[:from_user]
+            wallet = wallet - record[:amount]
+        else
+            wallet = wallet
+        end
+    end
+    puts "#{user}'s KelloggCoin balance is #{wallet}"
+    balance = balance + [{:name => user, :balance => wallet}]
+end
+
+puts balance.inspect
